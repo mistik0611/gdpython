@@ -6,7 +6,7 @@ import random
 try:
     cubeColor = input("Select a color: ")
 except ValueError:
-    print("Invalid color, please try again") # Can be reworked later
+    print("Invalid color, please try again") # Doesn't work for some reason
 # Setting up the game screen
 gameScreen = turtle.Screen()
 gameScreen.title("Geometry Dash in Python Project")
