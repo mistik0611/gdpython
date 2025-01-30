@@ -63,7 +63,7 @@ while gameOver == False:
     if onAir:
         cube.sety(cube.ycor() + cubeSpeed)
     else:
-        cube.sety(-29)
+        cube.sety(groundHeight)
     # Collision with ground
     if cube.ycor() <= groundHeight:
         cube.sety(groundHeight)
@@ -79,5 +79,8 @@ while gameOver == False:
         turtle.penup()
         turtle.goto(0, 0)
         turtle.write(f"Game Over!\nTime: {gameTime:.2f} seconds", align="center", font=("Arial", 24, "bold"))
+        # Exit key binding, only works after game over
+        if gameOver == True:
+            turtle.onkeypress(exit, "Escape")
 
 gameScreen.mainloop()
