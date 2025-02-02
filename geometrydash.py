@@ -12,6 +12,7 @@ gameScreen = turtle.Screen()
 gameScreen.title("Geometry Dash in Python Project")
 gameScreen.screensize(800,600)
 gameScreen.bgcolor("dodgerblue")
+gameScreen.tracer(0)
 turtle.penup()
 turtle.goto(-400,-50)
 turtle.pendown()
@@ -34,8 +35,8 @@ spike.penup()
 spike.goto(100,-38)
 startTime = time.time()
 # Jumping and gravity variables
-jumpPower = 15
-gravity = -1
+jumpPower = 10
+gravity = -0.4
 cubeSpeed = 0
 groundHeight = -29
 onAir = False
@@ -49,11 +50,10 @@ def jump():
 gameScreen.listen()
 gameScreen.onkeypress(jump, "Up")
 # Game loop
-while gameOver == False:
-    gameScreen.update()
+while not gameOver:
+    
     # Spike movement
-    x = spike.xcor()
-    spike.setx(x - 5)
+    spike.setx(spike.xcor() - 2.5)
     if spike.xcor() < -400:
         spike.hideturtle()
         spike.goto(random.randint(0, 400), -38)
@@ -82,5 +82,7 @@ while gameOver == False:
         # Exit key binding, only works after game over
         if gameOver == True:
             turtle.onkeypress(exit, "Escape")
+    gameScreen.update() # Manually update the screen
+    time.sleep(0.01) # Slow down the game
 
 gameScreen.mainloop()
