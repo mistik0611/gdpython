@@ -52,7 +52,7 @@ gameScreen.onkeypress(jump, "Up")
 # Game loop
 while not gameOver:
     # Spike movement
-    spike.setx(spike.xcor() - 2,)
+    spike.setx(spike.xcor() - 2)
     if spike.xcor() < -400:
         spike.hideturtle()
         spike.goto(random.randint(0, 400), -38)
