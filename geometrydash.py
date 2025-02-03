@@ -51,9 +51,8 @@ gameScreen.listen()
 gameScreen.onkeypress(jump, "Up")
 # Game loop
 while not gameOver:
-    
     # Spike movement
-    spike.setx(spike.xcor() - 2.5)
+    spike.setx(spike.xcor() - 2,)
     if spike.xcor() < -400:
         spike.hideturtle()
         spike.goto(random.randint(0, 400), -38)
@@ -64,6 +63,29 @@ while not gameOver:
         cube.sety(cube.ycor() + cubeSpeed)
     else:
         cube.sety(groundHeight)
+    
+    # Function for pause menu
+    #writeTurtle = turtle.Turtle()
+    #paused = False
+    #def pause():
+    #    while not gameOver:
+    #        writeTurtle.hideturtle()
+    #        writeTurtle.write("Paused\nPress Esc to Resume")
+    #        paused = True
+    #        break
+    # Function to resume the game
+    #def resume():
+    #    while not gameOver:
+    #        if paused:
+    #            writeTurtle.clear()
+    #            continue
+    # Pause/resume keybind
+    #if paused == False:
+    #    gameScreen.onkeypress(pause, "Esc")
+    #else:
+    #    gameScreen.onkeypress(resume, "Esc")
+    # Rework this whole part
+    
     # Collision with ground
     if cube.ycor() <= groundHeight:
         cube.sety(groundHeight)
@@ -80,8 +102,8 @@ while not gameOver:
         turtle.goto(0, 0)
         turtle.write(f"Game Over!\nTime: {gameTime:.2f} seconds", align="center", font=("Arial", 24, "bold"))
         # Exit key binding, only works after game over
-        if gameOver == True:
-            turtle.onkeypress(exit, "Escape")
+        if gameOver:
+            gameScreen.onkeypress(exit, "Escape")
     gameScreen.update() # Manually update the screen
     time.sleep(0.01) # Slow down the game
 
