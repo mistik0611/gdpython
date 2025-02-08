@@ -65,25 +65,26 @@ while not gameOver:
         cube.sety(groundHeight)
     
     # Function for pause menu
-    #writeTurtle = turtle.Turtle()
-    #paused = False
-    #def pause():
-    #    while not gameOver:
-    #        writeTurtle.hideturtle()
-    #        writeTurtle.write("Paused\nPress Esc to Resume")
-    #        paused = True
-    #        break
+    writeTurtle = turtle.Turtle()
+    paused = False
+    def pause():
+        global paused
+        while not gameOver:
+           writeTurtle.hideturtle()
+           writeTurtle.write("Paused\nPress Esc to Resume")
+           paused = True
+           break
     # Function to resume the game
-    #def resume():
-    #    while not gameOver:
-    #        if paused:
-    #            writeTurtle.clear()
-    #            continue
+    def resume():
+       while not gameOver:
+           if paused:
+               writeTurtle.clear()
+               continue
     # Pause/resume keybind
-    #if paused == False:
-    #    gameScreen.onkeypress(pause, "Esc")
-    #else:
-    #    gameScreen.onkeypress(resume, "Esc")
+    if not paused:
+       gameScreen.onkeypress(pause, "Escape")
+    else:
+       gameScreen.onkeypress(resume, "Escape")
     # Rework this whole part
     
     # Collision with ground
