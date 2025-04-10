@@ -5,8 +5,8 @@ import random
 # Icon color selection
 try:
     cubeColor = input("Select a color: ")
-except ValueError:
-    print("Invalid color, please try again") # Doesn't work for some reason
+except TypeError:
+    print("Invalid input, please try again") # Doesn't work for some reason
 # Setting up the game screen
 gameScreen = turtle.Screen()
 gameScreen.title("Geometry Dash in Python Project")
@@ -51,42 +51,54 @@ gameScreen.listen()
 gameScreen.onkeypress(jump, "Up")
 # Game loop
 while not gameOver:
-    # Spike movement
-    spike.setx(spike.xcor() - 2)
+    # Spike movement function
+    def moveSpike():
+        global spike
+        spike.setx(spike.xcor() - 2)
     if spike.xcor() < -400:
         spike.hideturtle()
         spike.goto(random.randint(0, 400), -38)
         spike.showturtle()
-    # Cube movement
-    cubeSpeed += gravity # Add gravity to speed
+    moveSpike() # Calling the function
+    # Cube movement function
+    def moveCube():
+        global cube, cubeSpeed, onAir
+        cubeSpeed += gravity # Add gravity to speed
     if onAir:
         cube.sety(cube.ycor() + cubeSpeed)
     else:
         cube.sety(groundHeight)
+    moveCube() # Calling the function
     
-    # Function for pause menu
-    writeTurtle = turtle.Turtle()
+    # Working on a functional pause screen
     paused = False
+    # Pause function
     def pause():
-        global paused
-        while not gameOver:
-           writeTurtle.hideturtle()
-           writeTurtle.write("Paused\nPress Esc to Resume")
-           paused = True
-           break
-    # Function to resume the game
+        global gameOver, paused
+        gameOver = True
+        paused = True
+        turtle.hideturtle()
+        turtle.penup()
+        turtle.goto(0, 0)
+        turtle.write("Game Paused\nPress R to continue", align="center", font=("Arial", 24, "bold"))
+    # Resume function
     def resume():
-       while not gameOver:
-           if paused:
-               writeTurtle.clear()
-               continue
-    # Pause/resume keybind
-    if not paused:
-       gameScreen.onkeypress(pause, "Escape")
+        global gameOver, paused
+        gameOver = False
+        paused = False
+        turtle.clear()
+        turtle.goto(-400, -50)
+        turtle.pendown()
+        turtle.goto(400, -50)
+        turtle.hideturtle()
+        moveSpike()
+        moveCube()
+    # Pause and resume key binding
+    if paused:
+        gameScreen.onkeypress(resume, "r")
     else:
-       gameScreen.onkeypress(resume, "Escape")
-    # Rework this whole part
-    
+        gameScreen.onkeypress(pause, "Escape")
+
     # Collision with ground
     if cube.ycor() <= groundHeight:
         cube.sety(groundHeight)
