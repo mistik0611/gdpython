@@ -6,6 +6,8 @@ I am just a beginner in coding, so my code might not be very well organized and 
 ## Current issues
 ~~Game is laggy, key press doesn't work instantly~~ Fixed on 2025/02/01
 
-Pause menu code failed, in the file ~~as comments~~
+~~Pause menu code failed, in the file as comments~~ Fixed on 2025/04/10
 
-The program is laggy again
+~~The program is laggy again~~ Fixed on 2025/04/10
+
+Cannot resume after pausing the game
